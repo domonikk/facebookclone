@@ -13,7 +13,9 @@ import { MaterialModule } from './shared/material.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent, 
+    HomeComponent
+
   ],
   imports: [
     BrowserModule,
