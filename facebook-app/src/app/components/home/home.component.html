@@ -126,7 +126,7 @@
                     <mat-card-header class="post-message-header" style="padding-bottom: 20px; border-bottom: 1px xolid lightgrey;"> 
                         <img alt="" mat-card-avatar [src]=""> 
 
-                        <form #form="">
+                        <form #form="ngForm" (ngSubmit)="postMessage(form)">
                             <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind" type="text"> 
                             <button style="display:none;" type="submit"></button>
                         </form>
@@ -152,16 +152,16 @@
 
 
                 <!--Loop Through All Posts from Database on Display--> 
-                <mat-card *ngFor="" class="posts">
+                <mat-card *ngFor="let p of posts" class="posts">
                     <mat-card-header class="posts__header"> 
                         <div class="posts__header__right">
-                            <img alt="" mat-card-avatar[src]=""> 
-                            <span></span> 
-                            <h3></h3>
+                            <img alt="{{p?.title}" mat-card-avatar[src]="p?.avatar"> 
+                            <span>{{p?.time?.seconds * 1000 | date:'shortTime'}}</span> 
+                            <h3>{{p?.title}}</h3>
                         </div>
                     </mat-card-header> 
                     <mat-card-content class="posts__body"> 
-                        <p></p>
+                        <p>{{p?.message}}</p>
                     </mat-card-content>
                 </mat-card>
             </div> 
