@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'; 
 import { NgForm } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<RegisterComponent>) { }
 
   ngOnInit(): void {
   }

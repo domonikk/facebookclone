@@ -12,14 +12,14 @@
             </div> 
 
             <div class="email_password">
-                <input type="text" placeholder="Email" name='email' ngModel> 
+                <input type="text" placeholder="Email" name="email" ngModel> 
                 <input type="text" placeholder="Image Url" name="avatar" ngModel>
                 <input type="password" placeholder="Password" name="password" ngModel>
             </div> 
 
             <p> By clicking Sign Up, you agree to our Terms, Data Polic and Cookie Policy. You may receive SMS notificatons from us and can opt out at anyy time.</p> 
 
-            <button type="submit" class="submit-button" mat-dialog-close="form.value">Sign Up</button>
+            <button type="submit" class="submit-button" [mat-dialog-close]="form.value">Sign Up</button>
 
         </form>
 

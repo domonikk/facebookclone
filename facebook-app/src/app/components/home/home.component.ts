@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PostService } from 'src/app/service/post.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,25 +27,44 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private postService:PostService,
               private authService: AuthService) { }
 
-  ngOnInit(): void { 
+  async ngOnInit(): Promise <void> { 
     this.subs.push(
-      this.postService.getAllPosts().subscribe(posts=>{
-        this.posts = posts;
+      this.postService.getAllPosts().subscribe( async (posts) =>{
+        this.posts = posts; 
+        console.log(posts);
       })
     ); 
 
-    this.subs.push( 
-      
-
-    )
-  }  
+    this.subs.push(this.authService.CurrentUser().subscribe(user =>{
+      this.user= user; 
+      console.log(user);
+    }));
+  }    
 
   ngOnDestroy():void{
     this.subs.map(s=> s.unsubscribe());
   }
 
-  postMessage(form:NgForm): void{
-    console.log(form.value);
+  postMessage(form :NgForm): void{
+    const {message}= form.value; 
+    this.postService.postMessage(message,
+      `${this.user.firstName} ${this.user.lastName}`, 
+      { 
+        avatar: this.user.avatar, 
+        lastName: this.user.lastName, 
+        firstName: this.user.firstName
+      }, 
+    ); 
+    form.resetForm();
+  }  
+
+  logout():void{
+    this.authService.Logout();
   }
 
+
+
+ 
+
+ 
 }

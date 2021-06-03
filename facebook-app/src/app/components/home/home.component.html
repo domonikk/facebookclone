@@ -32,8 +32,8 @@
 
         <div class="home__header__right"> 
             <div> 
-                <img src="" alt="avatar" mat-card-avatar> 
-                <span class="name">MY NAME</span>
+                <img  [src]="user?.avatar" alt="avatar" mat-card-avatar> 
+                <span class="name">{{user?.firstName || 'Domonique'}}</span>
             </div> 
 
             <div> 
@@ -52,7 +52,7 @@
                 
                 <mat-icon [matMenuTriggerFor]="menu">expand_more</mat-icon> 
                 <mat-menu #menu="matMenu">
-                   <button mat-menu-item> 
+                   <button mat-menu-item (click)="logout()"> 
                       <mat-icon>exit_to_app</mat-icon> Logout
                   </button>
                 </mat-menu>
@@ -65,8 +65,8 @@
         <div class="home__body__feedLeft">
             <div class="inside">
                 <div class="user-avatar">
-                    <img alt="" mat-card-avatar src=""> 
-                    <span class="name">NAME HERE</span>
+                    <img alt="" mat-card-avatar [src]="user?.avatar"> 
+                    <span class="name">{{user?.firstName}} {{user?.lastName}}</span>
                 </div> 
 
                 <div>
@@ -124,7 +124,7 @@
             <div class="home__body__contentMiddle__center">
                 <mat-card class="post-message"> 
                     <mat-card-header class="post-message-header" style="padding-bottom: 20px; border-bottom: 1px xolid lightgrey;"> 
-                        <img alt="" mat-card-avatar [src]=""> 
+                        <img alt="{{user?.firstName}}" mat-card-avatar [src]="user?.avatar"> 
 
                         <form #form="ngForm" (ngSubmit)="postMessage(form)">
                             <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind" type="text"> 
@@ -155,8 +155,8 @@
                 <mat-card *ngFor="let p of posts" class="posts">
                     <mat-card-header class="posts__header"> 
                         <div class="posts__header__right">
-                            <img alt="{{p?.title}" mat-card-avatar[src]="p?.avatar"> 
-                            <span>{{p?.time?.seconds * 1000 | date:'shortTime'}}</span> 
+                            <img alt="{{p?.title}}" mat-card-avatar [src]="p?.avatar"> 
+                            <span>{{p?.time?.seconds * 1000 | date:'medium'}}</span> 
                             <h3>{{p?.title}}</h3>
                         </div>
                     </mat-card-header> 
